@@ -1,0 +1,19 @@
+# Set the base image to Ubuntu
+FROM    ubuntu:trusty
+
+# File Author / Maintainer
+MAINTAINER Sean Finney
+
+# Install python and other dependencies
+RUN apt-get update && \
+    apt-get install -y python-pip python-dev
+RUN pip install -U pip
+
+WORKDIR /var/www
+ADD . /var/www
+
+# Optionally install the requirements.txt.  Ignore it otherwise
+RUN pip install -r requirements.txt || [ ! -f requirements.txt ]
+EXPOSE 5000
+#
+CMD python /var/www/run.py
