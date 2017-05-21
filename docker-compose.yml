@@ -6,25 +6,30 @@ nginx:
         - node3:node3
     ports:
         - "80:80"
+    mem_limit: 300m
 node1:
     image: finney/counter
     links:
         - redis
     ports:
         - "5000"
+    mem_limit: 300m
 node2:
     image: finney/counter
     links:
         - redis
     ports:
         - "5000"
+    mem_limit: 300m
 node3:
     image: finney/counter
     links:
         - redis
     ports:
         - "5000"
+    mem_limit: 300m
 redis:
     image: redis
     ports:
         - "6379"
+    mem_limit: 300m
