@@ -9,11 +9,16 @@ RUN apt-get update && \
     apt-get install -y python-pip python-dev
 RUN pip install -U pip
 
+RUN apt-get update && apt-get install -y unzip wget
+RUN cd /usr/local/bin && \
+  wget https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_linux_amd64.zip && \
+  unzip consul_0.6.4_linux_amd64.zip
+
 WORKDIR /var/www
 ADD . /var/www
 
 # Optionally install the requirements.txt.  Ignore it otherwise
 RUN pip install -r requirements.txt || [ ! -f requirements.txt ]
 EXPOSE 5000
-#
+
 CMD python /var/www/run.py

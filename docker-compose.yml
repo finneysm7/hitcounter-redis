@@ -1,35 +1,59 @@
 nginx:
     image: finney/nginx
     links:
-        - node1:node1
-        - node2:node2
-        - node3:node3
+      - node1:node1
+      - node2:node2
     ports:
-        - "80:80"
+      - "80:80"
+      - "8304:8300"
+      - "8404:8400"
+      - "8504:8500"
+      - "8604:8600"
+      - "9004:9001"
+    hostname: consul1
+    environment:
+      - CONSUL_OPTS=-bootstrap-expect=4
     mem_limit: 300m
 node1:
     image: finney/counter
     links:
-        - redis
+      - redis
     ports:
-        - "5000"
+      - "5000"
+      - "8303:8300"
+      - "8403:8400"
+      - "8503:8500"
+      - "8603:8600"
+      - "9003:9001"
+    hostname: consul1
+    environment:
+      - CONSUL_OPTS=-bootstrap-expect=4
     mem_limit: 300m
 node2:
     image: finney/counter
     links:
-        - redis
+      - redis
     ports:
-        - "5000"
-    mem_limit: 300m
-node3:
-    image: finney/counter
-    links:
-        - redis
-    ports:
-        - "5000"
+      - "5000"
+      - "8302:8300"
+      - "8402:8400"
+      - "8502:8500"
+      - "8602:8600"
+      - "9002:9001"
+    hostname: consul1
+    environment:
+      - CONSUL_OPTS=-bootstrap-expect=4
     mem_limit: 300m
 redis:
-    image: redis
+    image: finney/redis
     ports:
-        - "6379"
+      - "6379"
+      - "8301:8300"
+      - "8401:8400"
+      - "8501:8500"
+      - "8601:8600"
+      - "9001:9001"
+    hostname: consul1
+    environment:
+      - CONSUL_OPTS=-bootstrap-expect=4
     mem_limit: 300m
