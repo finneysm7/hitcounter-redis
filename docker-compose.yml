@@ -21,15 +21,10 @@ node2:
     ports:
         - "5000"
     mem_limit: 300m
-node3:
-    image: finney/counter
-    links:
-        - redis
-    ports:
-        - "5000"
-    mem_limit: 300m
 redis:
     image: redis
     ports:
         - "6379"
     mem_limit: 300m
+    links:
+      - consul

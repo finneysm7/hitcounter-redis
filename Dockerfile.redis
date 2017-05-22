@@ -1,0 +1,12 @@
+# Set the base image to Ubuntu
+FROM redis
+
+# File Author / Maintainer
+MAINTAINER Sean Finney
+
+RUN apt-get update && apt-get install -y unzip
+RUN cd /usr/local/bin && /
+  wget https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_linux_amd64.zip && /
+  unzip consul_0.6.4_linux_amd64.zip
+
+CMD 
